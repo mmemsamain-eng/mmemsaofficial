@@ -508,20 +508,20 @@
                         </div>
                         <select required name="institution" class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                             <option value="">Select Institution</option>
-                            <option>Medicare Health Professionals College</option>
-                            <option>Ernest Cook University (ECUREI)</option>
-                            <option>Mengo Hospital Training School</option>
+                            <option value='Medicare">Medicare Health Professionals College</option>
+                            <option value="ECUREI">Ernest Cook University (ECUREI)</option>
+                            <option value="Mengo">Mengo Hospital Training School</option>
                         </select>
                         <input type="text" placeholder="Course of Study" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                         <div class="grid grid-cols-2 gap-4">
                             <input type="tel" placeholder="Phone Number" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                             <select name="gender" class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
-                                <option>Brother</option>
-                                <option>Sister</option>
+                                <option value="Brother">Brother</option>
+                                <option value="Sister">Sister</option>
                             </select>
                         </div>
                         <input type="email" placeholder="Email Address" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
-                        <button class="w-full btn-islamic text-xl py-5 shadow-2xl">Confirm Registration</button>
+                        <button onclick="sendToWhatsApp()" class="w-full btn-islamic text-xl py-5 shadow-2xl">Confirm Registration</button>
                     </form>
                     <div id="reg-success" class="hidden text-center py-10">
                         <i class="fas fa-check-circle text-7xl text-emerald-500 mb-6"></i>
@@ -774,31 +774,41 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        function submitReg() {
-        src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
-         emailjs.init("zQbY8OPyiuf_ecPYe");
-    // Send form via EmailJS
-    emailjs.sendForm(
-        "service_I4vd1xy",    // replace with your actual Service ID
-        "template_bc1kc7h",   // replace with your actual Template ID
-        "#reg-form",          // your form ID
-        "zQbY8OPyiuf_ecPYe"     // replace with your actual Public Key
-    )
-    .then(function(response) {
-        // On success: hide form, show success message
-        document.getElementById('reg-form').classList.add('hidden');
-        document.getElementById('reg-success').classList.remove('hidden');
+        function sendToWhatsApp() {
+    // Collect values
+    const firstName = document.querySelector('input[name="first_name"]').value;
+    const lastName = document.querySelector('input[name="last_name"]').value;
+    const institution = document.querySelector('select[name="institution"]').value;
+    const course = document.querySelector('input[name="course"]').value;
+    const phone = document.querySelector('input[name="phone"]').value;
+    const genderSelect = document.querySelector('select[name="gender"]');
+    const gender = genderSelect ? genderSelect.value : "";
+    const email = document.querySelector('input[name="email"]').value;
 
-        // Reset the form for next use
-        document.getElementById('reg-form').reset();
+    // Validate required fields
+    if (!firstName || !lastName || !institution || !course || !phone || !email) {
+        alert("Please fill all required fields.");
+        return;
+    }
 
-        console.log("SUCCESS!", response.status, response.text);
-    }, function(error) {
-        // On error: show alert
-        alert("Oops! Something went wrong. Please try again.");
-        console.error("FAILED...", error);
-    });
+    // Format WhatsApp message
+    const message = `New MMEMSA Registration:%0A
+First Name: ${firstName}%0A
+Last Name: ${lastName}%0A
+Institution: ${institution}%0A
+Course: ${course}%0A
+Phone: ${phone}%0A
+Gender: ${gender}%0A
+Email: ${email}`;
+
+    // WhatsApp number (remove +, keep country code)
+    const whatsappNumber = "256788230472";
+
+    // Open WhatsApp
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+    window.open(whatsappURL, "_blank");
 }
+
 
 
         // Init
