@@ -627,18 +627,32 @@
                         <div class="bg-gray-50 p-8 rounded-3xl">
                             <i class="fas fa-envelope text-3xl text-emerald-600 mb-4"></i>
                             <h4 class="font-bold text-xl mb-2">Email</h4>
-                            <p class="text-gray-600 text-sm">info@mmemsa.org<br>contact@mmemsa.org</p>
+                            <p class="text-gray-600 text-sm">mmemsamain@gmail.com<br>contact@mmemsa.org</p>
                         </div>
                     </div>
                     
                     <div class="lg:col-span-2 bg-emerald-900 p-12 rounded-[50px] shadow-2xl">
                         <h3 class="text-3xl font-bold text-white mb-8">Send us a Message</h3>
-                        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <input type="text" placeholder="Your Name" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
-                            <input type="email" placeholder="Your Email" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
-                            <input type="text" placeholder="Subject" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
-                            <textarea placeholder="Message" rows="6" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20"></textarea>
-                            <button class="md:col-span-2 bg-emerald-500 text-white py-4 rounded-xl font-bold text-xl hover:bg-emerald-400 transition">Submit Message</button>
+                        <form action="https://formsubmit.co/mmemsamain@gmail.com" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <input type="text" name="name" placeholder="Your Name" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20" required>
+
+    <input type="email" name="email" placeholder="Your Email" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20" required>
+
+    <input type="text" name="subject" placeholder="Subject" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
+
+    <textarea name="message" placeholder="Message" rows="6" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20"></textarea>
+
+    <!-- Prevent spam -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- Optional: redirect after submit -->
+    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+
+    <button class="md:col-span-2 bg-emerald-500 text-white py-4 rounded-xl font-bold text-xl hover:bg-emerald-400 transition" type="submit">
+        Submit Message
+    </button>
+
                         </form>
                     </div>
                 </div>
