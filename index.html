@@ -132,14 +132,14 @@
                 </div>
 
                 <div class="hidden lg:flex items-center space-x-8 text-sm font-bold uppercase text-gray-600">
-                    <a href="javascript:void(0)" onclick="showPage('home')" class="nav-item hover:text-emerald-700 transition">Home</a>
-                    <a href="javascript:void(0)" onclick="showPage('about')" class="nav-item hover:text-emerald-700 transition">About</a>
-                    <a href="javascript:void(0)" onclick="showPage('activities')" class="nav-item hover:text-emerald-700 transition">Activities</a>
-                    <a href="javascript:void(0)" onclick="showPage('leadership')" class="nav-item hover:text-emerald-700 transition">Leadership</a>
-                    <a href="javascript:void(0)" onclick="showPage('membership')" class="nav-item hover:text-emerald-700 transition">Membership</a>
-                    <a href="javascript:void(0)" onclick="showPage('gallery')" class="nav-item hover:text-emerald-700 transition">Gallery</a>
-                    <a href="javascript:void(0)" onclick="showPage('resources')" class="nav-item text-emerald-600 border border-emerald-200 px-3 py-1 rounded hover:bg-emerald-50">Resources</a>
-                    <a href="javascript:void(0)" onclick="showPage('contact')" class="nav-item hover:text-emerald-700 transition">Contact</a>
+                    <a href="#home" onclick="showPage('home')" class="nav-item hover:text-emerald-700 transition">Home</a>
+                    <a href="#about" onclick="showPage('about')" class="nav-item hover:text-emerald-700 transition">About</a>
+                    <a href="#activities" onclick="showPage('activities')" class="nav-item hover:text-emerald-700 transition">Activities</a>
+                    <a href="#leadership" onclick="showPage('leadership')" class="nav-item hover:text-emerald-700 transition">Leadership</a>
+                    <a href="#membership" onclick="showPage('membership')" class="nav-item hover:text-emerald-700 transition">Membership</a>
+                    <a href="#gallery" onclick="showPage('gallery')" class="nav-item hover:text-emerald-700 transition">Gallery</a>
+                    <a href="#resources" onclick="showPage('resources')" class="nav-item text-emerald-600 border border-emerald-200 px-3 py-1 rounded hover:bg-emerald-50">Resources</a>
+                    <a href="#contact" onclick="showPage('contact')" class="nav-item hover:text-emerald-700 transition">Contact</a>
                 </div>
 
                 <button class="lg:hidden text-2xl text-emerald-900" onclick="toggleMobileMenu()">
@@ -149,11 +149,11 @@
         </div>
         <!-- Mobile Nav -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t p-6 space-y-4 shadow-xl">
-            <a href="javascript:void(0)" onclick="showPage('home')" class="block font-bold">Home</a>
-            <a href="javascript:void(0)" onclick="showPage('about')" class="block font-bold">About</a>
-            <a href="javascript:void(0)" onclick="showPage('activities')" class="block font-bold">Activities</a>
-            <a href="javascript:void(0)" onclick="showPage('membership')" class="block font-bold">Join Us</a>
-            <a href="javascript:void(0)" onclick="showPage('resources')" class="block font-bold text-emerald-600">Resources</a>
+            <a href="#home" onclick="showPage('home')" class="block font-bold">Home</a>
+            <a href="#about" onclick="showPage('about')" class="block font-bold">About</a>
+            <a href="#activities" onclick="showPage('activities')" class="block font-bold">Activities</a>
+            <a href="#memebership" onclick="showPage('membership')" class="block font-bold">Join Us</a>
+            <a href="#resources" onclick="showPage('resources')" class="block font-bold text-emerald-600">Resources</a>
         </div>
     </nav>
 
@@ -728,7 +728,91 @@
         </div>
     </footer>
 
-    
+     <scipt>
+        // Page Navigation
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(p => p.classList.add('hidden'));
+            
+            const target = document.getElementById('page-' + pageId);
+            if(target) {
+                target.classList.remove('hidden');
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                
+                // Active link style
+                const links = document.querySelectorAll('.nav-item');
+                links.forEach(l => l.classList.remove('nav-active'));
+                
+                // Restart carousel if home
+                if(pageId === 'home') startCarousel();
+                else stopCarousel();
+            }
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Hero Carousel
+        let slideIndex = 0;
+        let timer;
+        const slides = document.querySelectorAll('.hero-slide');
+
+        function startCarousel() {
+            if(timer) return;
+            timer = setInterval(() => {
+                slides[slideIndex].classList.remove('active');
+                slideIndex = (slideIndex + 1) % slides.length;
+                slides[slideIndex].classList.add('active');
+            }, 6000);
+        }
+
+        function stopCarousel() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function sendToWhatsApp() {
+    // Collect values
+    const firstName = document.querySelector('input[name="first_name"]').value;
+    const lastName = document.querySelector('input[name="last_name"]').value;
+    const institution = document.querySelector('select[name="institution"]').value;
+    const course = document.querySelector('input[name="course"]').value;
+    const phone = document.querySelector('input[name="phone"]').value;
+    const genderSelect = document.querySelector('select[name="gender"]');
+    const gender = genderSelect ? genderSelect.value : "";
+    const email = document.querySelector('input[name="email"]').value;
+
+    // Validate required fields
+    if (!firstName || !lastName || !institution || !course || !phone || !email) {
+        alert("Please fill all required fields.");
+        return;
+    }
+
+    // Format WhatsApp message
+    const message = `New MMEMSA Registration:%0A
+First Name: ${firstName}%0A
+Last Name: ${lastName}%0A
+Institution: ${institution}%0A
+Course: ${course}%0A
+Phone: ${phone}%0A
+Gender: ${gender}%0A
+Email: ${email}`;
+
+    // WhatsApp number (remove +, keep country code)
+    const whatsappNumber = "256788230472";
+
+    // Open WhatsApp
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+    window.open(whatsappURL, "_blank");
+}
+
+
+
+        // Init
+        window.onload = startCarousel;
+    </script>
    
 </body>
 </html>
