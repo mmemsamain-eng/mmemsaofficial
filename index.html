@@ -506,7 +506,7 @@
                             <input type="text" placeholder="First Name" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                             <input type="text" placeholder="Last Name" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                         </div>
-                        <select required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                        <select required name="institution" class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                             <option value="">Select Institution</option>
                             <option>Medicare Health Professionals College</option>
                             <option>Ernest Cook University (ECUREI)</option>
@@ -515,7 +515,7 @@
                         <input type="text" placeholder="Course of Study" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                         <div class="grid grid-cols-2 gap-4">
                             <input type="tel" placeholder="Phone Number" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
-                            <select class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                            <select name="gender" class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                                 <option>Brother</option>
                                 <option>Sister</option>
                             </select>
@@ -774,9 +774,29 @@
         }
 
         function submitReg() {
-            document.getElementById('reg-form').classList.add('hidden');
-            document.getElementById('reg-success').classList.remove('hidden');
-        }
+    // Send form via EmailJS
+    emailjs.sendForm(
+        "service_I4vd1xy",    // replace with your actual Service ID
+        "template_bc1kc7h",   // replace with your actual Template ID
+        "#reg-form",          // your form ID
+        "zQbY8OPyiuf_ecPYe"     // replace with your actual Public Key
+    )
+    .then(function(response) {
+        // On success: hide form, show success message
+        document.getElementById('reg-form').classList.add('hidden');
+        document.getElementById('reg-success').classList.remove('hidden');
+
+        // Reset the form for next use
+        document.getElementById('reg-form').reset();
+
+        console.log("SUCCESS!", response.status, response.text);
+    }, function(error) {
+        // On error: show alert
+        alert("Oops! Something went wrong. Please try again.");
+        console.error("FAILED...", error);
+    });
+}
+
 
         // Init
         window.onload = startCarousel;
