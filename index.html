@@ -728,11 +728,7 @@
         </div>
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"> </script>
-    <script>
-        emailjs.init("zQbY8OPyiuf_ecPYe");
-    </script>
-
+    
     <scipt>
         // Page Navigation
         function showPage(pageId) {
@@ -779,6 +775,8 @@
         }
 
         function submitReg() {
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
+         emailjs.init("zQbY8OPyiuf_ecPYe");
     // Send form via EmailJS
     emailjs.sendForm(
         "service_I4vd1xy",    // replace with your actual Service ID
