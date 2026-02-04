@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMEMSA | Official Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --islamic-green: #006633;
+            --deep-gold: #C5A059;
+            --soft-cream: #FDFBF7;
+        }
+        body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; background-color: var(--soft-cream); }
+        .arabic-font { font-family: 'Amiri', serif; }
+        
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Hero Carousel */
+        .hero-slide {
+            display: none;
+            height: 80vh;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1s ease-in-out;
+            animation: zoomEffect 20s infinite alternate;
+        }
+        @keyframes zoomEffect { from { background-scale: 1; } to { background-scale: 1.1; } }
+        .hero-slide.active { display: flex; }
+
+        /* Talking Image Styles */
+        .talking-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 400px;
+        }
+        .talking-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .talking-image-container .caption-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 102, 51, 0.9) 10%, rgba(0,0,0,0.2) 60%, transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            color: white;
+            opacity: 0.9;
+            transition: all 0.4s ease;
+        }
+        .talking-image-container:hover img { transform: scale(1.1); }
+        .talking-image-container:hover .caption-overlay { background: rgba(0, 102, 51, 0.85); }
+
+        /* Components */
+        .btn-islamic {
+            background: var(--islamic-green);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 51, 0.3);
+        }
+        .btn-islamic:hover {
+            background: #004d26;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 51, 0.4);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        .nav-active { border-bottom: 3px solid var(--islamic-green); color: var(--islamic-green) !important; }
+        
+        /* Section Spacing */
+        .page-content { min-height: 80vh; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; color: #1a1a1a; position: relative; display: inline-block; }
+        .section-header h2::after { content: ''; position: absolute; width: 60%; height: 4px; background: var(--deep-gold); bottom: -10px; left: 20%; border-radius: 2px; }
+    </style>
+</head>
+<body>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/256788230472" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex items-center cursor-pointer" onclick="showPage('home')">
+                    <div class="w-14 h-14 mr-3 bg-emerald-800 rounded-full flex items-center justify-center text-white text-[10px] font-bold text-center leading-tight p-1">
+                        <img src="logo.jpg" alt="MMEMSA">
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-black text-emerald-900 tracking-tighter">MMEMSA</h1>
+                        <p class="text-[9px] uppercase tracking-[0.2em] text-gray-500 font-bold">Medicare Mengo ECUREI Muslim Students Association</p>
+                    </div>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-8 text-sm font-bold uppercase text-gray-600">
+                    <a href="javascript:void(0)" onclick="showPage('home')" class="nav-item hover:text-emerald-700 transition">Home</a>
+                    <a href="javascript:void(0)" onclick="showPage('about')" class="nav-item hover:text-emerald-700 transition">About</a>
+                    <a href="javascript:void(0)" onclick="showPage('activities')" class="nav-item hover:text-emerald-700 transition">Activities</a>
+                    <a href="javascript:void(0)" onclick="showPage('leadership')" class="nav-item hover:text-emerald-700 transition">Leadership</a>
+                    <a href="javascript:void(0)" onclick="showPage('membership')" class="nav-item hover:text-emerald-700 transition">Membership</a>
+                    <a href="javascript:void(0)" onclick="showPage('gallery')" class="nav-item hover:text-emerald-700 transition">Gallery</a>
+                    <a href="javascript:void(0)" onclick="showPage('resources')" class="nav-item text-emerald-600 border border-emerald-200 px-3 py-1 rounded hover:bg-emerald-50">Resources</a>
+                    <a href="javascript:void(0)" onclick="showPage('contact')" class="nav-item hover:text-emerald-700 transition">Contact</a>
+                </div>
+
+                <button class="lg:hidden text-2xl text-emerald-900" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t p-6 space-y-4 shadow-xl">
+            <a href="javascript:void(0)" onclick="showPage('home')" class="block font-bold">Home</a>
+            <a href="javascript:void(0)" onclick="showPage('about')" class="block font-bold">About</a>
+            <a href="javascript:void(0)" onclick="showPage('activities')" class="block font-bold">Activities</a>
+            <a href="javascript:void(0)" onclick="showPage('membership')" class="block font-bold">Join Us</a>
+            <a href="javascript:void(0)" onclick="showPage('resources')" class="block font-bold text-emerald-600">Resources</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HOME PAGE -->
+        <section id="page-home" class="page-content active">
+            <!-- Hero Carousel -->
+            <div class="relative w-full">
+                <div class="hero-slide active items-center px-8" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img1.jpg');">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <span class="text-emerald-400 font-bold tracking-widest uppercase mb-4 block">Assalamu Alaykum</span>
+                        <h2 class="text-4xl md:text-7xl font-extrabold text-white mb-6">Uniting Muslim Hearts in Medicine</h2>
+                        <p class="text-lg md:text-2xl text-gray-200 mb-10 leading-relaxed">
+                           Representing students from Medicare, ECUREI, and Mengo Hospital Training School in Mengo-Kampala.</p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <button onclick="showPage('membership')" class="btn-islamic text-lg">Join MMEMSA TODAY</button>
+                            <button onclick="showPage('activities')" class="bg-white/10 backdrop-blur text-white border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-emerald-900 transition">View Activities</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-slide items-center px-8" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img3.jpg');">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <h2 class="text-4xl md:text-7xl font-extrabold text-white mb-6">Service to Humanity is Service to Allah</h2>
+                        <p class="text-lg md:text-2xl text-gray-200 mb-10 leading-relaxed">From free medical camps in Kisoro to local community health education in Mengo.</p>
+                        <button onclick="showPage('gallery')" class="btn-islamic">Explore Our Impact</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intro Section (Talking Images) -->
+            <div class="max-w-7xl mx-auto px-4 py-24">
+                <div class="section-header">
+                    <h2>Meet MMEMSA</h2>
+                    <p class="mt-4 text-gray-600 max-w-2xl mx-auto">A collaboration of three prestigious medical institutions in Mengo, dedicated to professional excellence and spiritual growth.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="talking-image-container">
+                        <img src="ramadan.jpg" alt="Institutional Unity">
+                        <div class="caption-overlay">
+                            <h3 class="text-2xl font-bold mb-2">Please Contribute | Ramadan Coming</h3>
+                            <p class="text-sm">Bridging Medicare, ECUREI, and Mengo Hospital Training School under one banner of faith.</p>
+                        </div>
+                    </div>
+                    <div class="talking-image-container">
+                        <img src="gal7.jpg" alt="Islamic Values">
+                        <div class="caption-overlay">
+                            <h3 class="text-2xl font-bold mb-2">Faith-Led Practice</h3>
+                            <p class="text-sm">Integrating Islamic medical ethics into our daily training and patient care approach.</p>
+                        </div>
+                    </div>
+                    <div class="talking-image-container">
+                        <img src="camp.jpg" alt="Community Outreach">
+                        <div class="caption-overlay">
+                            <h3 class="text-2xl font-bold mb-2">Medical Outreach</h3>
+                            <p class="text-sm">Bringing healthcare to the vulnerable communities through our student-led medical camps.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="bg-emerald-900 py-16 text-white text-center">
+                <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-12">
+                    <div class="cursor-pointer hover:scale-105 transition" onclick="showPage('membership')">
+                        <i class="fas fa-user-plus text-4xl mb-4 text-emerald-400"></i>
+                        <h4 class="font-bold">Membership</h4>
+                    </div>
+                    <div class="cursor-pointer hover:scale-105 transition" onclick="showPage('activities')">
+                        <i class="fas fa-calendar-alt text-4xl mb-4 text-emerald-400"></i>
+                        <h4 class="font-bold">Latest Activities</h4>
+                    </div>
+                    <div class="cursor-pointer hover:scale-105 transition" onclick="showPage('leadership')">
+                        <i class="fas fa-users-cog text-4xl mb-4 text-emerald-400"></i>
+                        <h4 class="font-bold">Our Leadership</h4>
+                    </div>
+                    <div class="cursor-pointer hover:scale-105 transition" onclick="showPage('contact')">
+                        <i class="fas fa-handshake text-4xl mb-4 text-emerald-400"></i>
+                        <h4 class="font-bold">Support Us</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT PAGE -->
+        <section id="page-about" class="page-content hidden py-24 px-4 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <div class="section-header">
+                    <h2>Our Story & Vision</h2>
+                </div>
+
+                <!-- History Section -->
+                <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+                    <div class="talking-image-container h-[500px]">
+                        <img src="logo.jpg" alt="Our History">
+                        <div class="caption-overlay">
+                            <h4 class="text-xl font-bold">The Beginning</h4>
+                            <p class="text-sm">MMEMSA started with a small group of visionary students in Medicare,Mengo & then ECUREI.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-emerald-900 mb-6 italic">“Founded in Unity, Sustained by Faith.”</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6 text-lg">
+                            The Medicare Mengo ECUREI Muslim Students Association (MMEMSA) was established to create a sanctuary for Muslim students across the major health institutions in Mengo. We believe that a healthcare worker's skills are doubled when driven by a compassionate, God-fearing heart.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center p-4 bg-emerald-50 rounded-lg">
+                                <i class="fas fa-university text-2xl text-emerald-700 mr-4"></i>
+                                <span class="font-bold text-gray-800">Institutions: Medicare, ECUREI, Mengo Training School</span>
+                            </div>
+                            <p class="text-gray-600">Our history is defined by the collaborative spirit of students who refused to let institutional boundaries separate the Ummah.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision Mission Grid -->
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-10 rounded-3xl border-b-8 border-emerald-600 hover:shadow-2xl transition">
+                        <i class="fas fa-eye text-5xl text-emerald-600 mb-6"></i>
+                        <h4 class="text-2xl font-black mb-4">Vision</h4>
+                        <p class="text-gray-600">To produce the most competent and ethically upright Muslim healthcare professionals in East Africa.</p>
+                    </div>
+                    <div class="bg-gray-50 p-10 rounded-3xl border-b-8 border-emerald-600 hover:shadow-2xl transition">
+                        <i class="fas fa-rocket text-5xl text-emerald-600 mb-6"></i>
+                        <h4 class="text-2xl font-black mb-4">Mission</h4>
+                        <p class="text-gray-600">Empowering members through academic support, spiritual guidance, and impactful community service.</p>
+                    </div>
+                    <div class="bg-gray-50 p-10 rounded-3xl border-b-8 border-emerald-600 hover:shadow-2xl transition">
+                        <i class="fas fa-list-check text-5xl text-emerald-600 mb-6"></i>
+                        <h4 class="text-2xl font-black mb-4">Objectives</h4>
+                        <ul class="text-gray-600 text-sm space-y-2">
+                            <li>• Spiritual well-being of members</li>
+                            <li>• Excellence in Medical Ethics</li>
+                            <li>• Strengthening Muslim student unity</li>
+                            <li>• Humanitarian Medical Outreach</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVITIES PAGE -->
+        <section id="page-activities" class="page-content hidden py-24 px-4 bg-gray-50">
+            <div class="max-w-7xl mx-auto">
+                <div class="section-header">
+                    <h2>Events & Impact</h2>
+                </div>
+
+                <!-- Past Section -->
+                <div class="mb-24">
+                    <h3 class="text-3xl font-bold text-emerald-800 mb-10 border-l-8 border-emerald-600 pl-6">Memories of Impact</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
+                            <div class="talking-image-container h-60 rounded-none">
+                                <img src="img1.jpg" alt="Kisoro Camp">
+                                <div class="caption-overlay">
+                                    <span class="text-[10px] bg-emerald-600 px-2 py-1 rounded">Past</span>
+                                    <h4 class="font-bold">Medical Camp – Kisoro</h4>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-gray-600 text-sm mb-4">Providing free check-ups, medication, and health education to thousands in Kisoro district.</p>
+                                <span class="text-xs font-bold text-gray-400"><i class="far fa-calendar-alt mr-2"></i>September 2025</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
+                            <div class="talking-image-container h-60 rounded-none">
+                                <img src="ramadan1.jpg" alt="Ramadhan">
+                                <div class="caption-overlay">
+                                    <span class="text-[10px] bg-emerald-600 px-2 py-1 rounded">Past</span>
+                                    <h4 class="font-bold">Ramadhan 2025</h4>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-gray-600 text-sm mb-4">Weekly Iftars across Mengo Hospital, ECUREI, and Medicare for all fasting students.</p>
+                                <span class="text-xs font-bold text-gray-400"><i class="far fa-calendar-alt mr-2"></i>March 2025</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-3xl overflow-hidden shadow-lg group">
+                            <div class="talking-image-container h-60 rounded-none">
+                                <img src="img5.jpg" alt="Handover">
+                                <div class="caption-overlay">
+                                    <span class="text-[10px] bg-emerald-600 px-2 py-1 rounded">Past</span>
+                                    <h4 class="font-bold">Handover Ceremony</h4>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-gray-600 text-sm mb-4">Honoring outgoing leaders and welcoming the new executive committee of 2025.</p>
+                                <span class="text-xs font-bold text-gray-400"><i class="far fa-calendar-alt mr-2"></i>March 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Section -->
+                <div>
+                    <h3 class="text-3xl font-bold text-emerald-800 mb-10 border-l-8 border-orange-500 pl-6">Looking Ahead</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="flex items-center bg-white p-6 rounded-3xl shadow-xl border-r-8 border-orange-500">
+                            <div class="talking-image-container w-32 h-32 rounded-full flex-shrink-0 mr-6">
+                                <img src="ramadan.jpg" alt="Ceremony">
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-800">Ramadhan 2026</h4>
+                                <p class="text-gray-500 text-sm">The grand transition of leadership. Save the date for June!</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-white p-6 rounded-3xl shadow-xl border-r-8 border-emerald-500">
+                            <div class="talking-image-container w-32 h-32 rounded-full flex-shrink-0 mr-6">
+                                <img src="logo.jpg" alt="Charity">
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-800">MMEMSA HANDOVER</h4>
+                                <p class="text-gray-500 text-sm">Mentoring high school students in health and faith across Kampala.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEADERSHIP PAGE -->
+        <section id="page-leadership" class="page-content hidden py-24 px-4 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <div class="section-header">
+                    <h2>Our Executive Committee</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-12">
+                    <!-- Leader 1 -->
+                    <div class="text-center group">
+                        <div class="talking-image-container h-80 mb-6 rounded-2xl grayscale group-hover:grayscale-0 transition duration-500">
+                            <img src="chair.jpg" alt="Chairman">
+                            <div class="caption-overlay">
+                                <h5 class="text-lg font-bold">Mr. Lubega Mustwafa</h5>
+                                <p class="text-xs">Chairman</p>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900">Mr. Lubega Mustwafa</h4>
+                        <p class="text-emerald-700 font-medium">Executive Chairman</p>
+                        <p class="text-xs text-gray-400 mt-2">Ernest Cook University</p>
+                    </div>
+
+                    <!-- Leader 2 -->
+                    <div class="text-center group">
+                        <div class="talking-image-container h-80 mb-6 rounded-2xl grayscale group-hover:grayscale-0 transition duration-500">
+                            <img src="vice.jpg" alt="Vice">
+                            <div class="caption-overlay">
+                                <h5 class="text-lg font-bold">Mr.Lubega Shafiq</h5>
+                                <p class="text-xs">Vice Chairperson</p>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900">Mr. Lubega Shafiq</h4>
+                        <p class="text-emerald-700 font-medium">Vice Chairperson</p>
+                        <p class="text-xs text-gray-400 mt-2">Mengo Hospital Training School</p>
+                    </div>
+                    
+                     <!-- Leader 2 -->
+                    <div class="text-center group">
+                        <div class="talking-image-container h-80 mb-6 rounded-2xl grayscale group-hover:grayscale-0 transition duration-500">
+                            <img src="lady.jpg" alt="Vice">
+                            <div class="caption-overlay">
+                                <h5 class="text-lg font-bold">Name Loading ...</h5>
+                                <p class="text-xs">Chair Lady</p>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900">Name Loading ...</h4>
+                        <p class="text-emerald-700 font-medium">Chairlady</p>
+                        <p class="text-xs text-gray-400 mt-2">Mengo Hospital Training School</p>
+                    </div>
+
+                    <!-- Leader 3 -->
+                    <div class="text-center group">
+                        <div class="talking-image-container h-80 mb-6 rounded-2xl grayscale group-hover:grayscale-0 transition duration-500">
+                            <img src="lady3.jpg" alt="Secretary">
+                            <div class="caption-overlay">
+                                <h5 class="text-lg font-bold">Shekhat Babirye</h5>
+                                <p class="text-xs">General Secretary</p>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900">Shekhat Babirye</h4>
+                        <p class="text-emerald-700 font-medium">Gen. Secretary</p>
+                        <p class="text-xs text-gray-400 mt-2">Medicare Health Prof. College</p>
+                    </div>
+
+                    <!-- Leader 4 -->
+                    <div class="text-center group">
+                        <div class="talking-image-container h-80 mb-6 rounded-2xl grayscale group-hover:grayscale-0 transition duration-500">
+                            <img src="tres.jpg" alt="Finance">
+                            <div class="caption-overlay">
+                                <h5 class="text-lg font-bold">Mr. Sseguya Alafat</h5>
+                                <p class="text-xs">Finance Secretary</p>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900">Mr. Sseguya Alafat</h4>
+                        <p class="text-emerald-700 font-medium">Finance Secretary</p>
+                        <p class="text-xs text-gray-400 mt-2">Medicare Health Prof. College</p>
+                    </div>
+                    <p>Senior Members</p>
+                    <!-- Leader 2 -->
+                    <div class="text-center group">
+                        <div class="talking-image-container h-80 mb-6 rounded-2xl grayscale group-hover:grayscale-0 transition duration-500">
+                            <img src="sm1.jpg" alt="Vice">
+                            <div class="caption-overlay">
+                                <h5 class="text-lg font-bold">Imaam Mohammad Elias Kirabira</h5>
+                                <p class="text-xs">Senior Member</p>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900">Imaam Mohammad Elias Kirabira</h4>
+                        <p class="text-emerald-700 font-medium">Former Chairperson</p>
+                        <p class="text-xs text-gray-400 mt-2">Ernest Cook University (Almnus)</p>
+                    </div> 
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- MEMBERSHIP PAGE -->
+        <section id="page-membership" class="page-content hidden py-24 px-4 bg-gray-50">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-black text-emerald-900 mb-6">Become a Member Today</h2>
+                    <p class="text-gray-600 mb-10 text-lg">Join a network of over 300 students who are shaping the future of Islamic healthcare in Uganda. Access resources, mentorship, and community service opportunities.</p>
+                    
+                    <div class="talking-image-container h-80 rounded-3xl mb-8">
+                        <img src="img1.jpg" alt="Join Us">
+                        <div class="caption-overlay">
+                            <h4 class="text-xl font-bold">Stronger Together</h4>
+                            <p class="text-sm">Connect with brothers and sisters in your field.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-white rounded-xl shadow-sm border-l-4 border-emerald-600">
+                            <h5 class="font-bold text-emerald-900">Networking</h5>
+                            <p class="text-xs text-gray-500">Connect across 3 schools.</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl shadow-sm border-l-4 border-emerald-600">
+                            <h5 class="font-bold text-emerald-900">Support</h5>
+                            <p class="text-xs text-gray-500">Academic & Spiritual guidance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-10 rounded-[40px] shadow-2xl border border-gray-100">
+                    <form id="reg-form" onsubmit="event.preventDefault(); submitReg();" class="space-y-5">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="First Name" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                            <input type="text" placeholder="Last Name" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <select required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                            <option value="">Select Institution</option>
+                            <option>Medicare Health Professionals College</option>
+                            <option>Ernest Cook University (ECUREI)</option>
+                            <option>Mengo Hospital Training School</option>
+                        </select>
+                        <input type="text" placeholder="Course of Study" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="tel" placeholder="Phone Number" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                            <select class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option>Brother</option>
+                                <option>Sister</option>
+                            </select>
+                        </div>
+                        <input type="email" placeholder="Email Address" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                        <button class="w-full btn-islamic text-xl py-5 shadow-2xl">Confirm Registration</button>
+                    </form>
+                    <div id="reg-success" class="hidden text-center py-10">
+                        <i class="fas fa-check-circle text-7xl text-emerald-500 mb-6"></i>
+                        <h3 class="text-2xl font-bold text-emerald-900">Alhamdulillah!</h3>
+                        <p class="text-gray-600 mt-2">Your registration is received. Welcome to the family.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY PAGE -->
+        <section id="page-gallery" class="page-content hidden py-24 px-4 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <div class="section-header">
+                    <h2>Our Gallery</h2>
+                    <p class="mt-4 text-gray-500 italic">Visual moments of our journey in healthcare and faith.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="talking-image-container h-64 cursor-pointer">
+                        <img src="gal7.jpg" alt="Hospital Visit">
+                        <div class="caption-overlay">
+                            <p class="text-xs font-bold">Health Camps</p>
+                        </div>
+                    </div>
+                    <div class="talking-image-container h-64 cursor-pointer">
+                        <img src="gal2.jpg" alt="Camp">
+                        <div class="caption-overlay">
+                            <p class="text-xs font-bold">Community Medical Camp</p>
+                        </div>
+                    </div>
+                    <div class="talking-image-container h-64 cursor-pointer">
+                        <img src="gal3.jpg" alt="Ramadhan">
+                        <div class="caption-overlay">
+                            <p class="text-xs font-bold">Ramadhan Charity Drive</p>
+                        </div>
+                    </div>
+                    <div class="talking-image-container h-64 cursor-pointer">
+                        <img src="gal4.jpg" alt="Students">
+                        <div class="caption-overlay">
+                            <p class="text-xs font-bold">Student General Meeting</p>
+                        </div>
+                    </div>
+                    <div class="talking-image-container h-64 cursor-pointer">
+                        <img src="gal5.jpg" alt="Mentorship">
+                        <div class="caption-overlay">
+                            <p class="text-xs font-bold">Mentorship Sessions</p>
+                        </div>
+                    </div>
+                    <div class="talking-image-container h-64 cursor-pointer">
+                        <img src="gal6.jpg" alt="Graduation">
+                        <div class="caption-overlay">
+                            <p class="text-xs font-bold">Member Graduation Celebration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESOURCES PAGE -->
+        <section id="page-resources" class="page-content hidden py-24 px-4 bg-emerald-50">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="mb-10">
+                    <i class="fas fa-book-reader text-8xl text-emerald-200"></i>
+                </div>
+                <h2 class="text-4xl font-black text-emerald-900 mb-6 uppercase tracking-tighter">Student Resource Hub</h2>
+                <div class="bg-white p-16 rounded-[50px] shadow-inner border-4 border-emerald-100 relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-emerald-50 rounded-full"></div>
+                    <p class="text-2xl text-gray-500 font-medium mb-6 relative z-10">
+                        📚 We are currently curating the best Islamic and Academic medical resources for you.
+                    </p>
+                    <p class="text-emerald-700 font-bold text-lg animate-pulse">
+                        “Learning resources will be uploaded soon. Stay connected.”
+                    </p>
+                    <div class="mt-10 flex justify-center space-x-4">
+                        <div class="w-12 h-1 bg-emerald-200"></div>
+                        <div class="w-12 h-1 bg-emerald-200"></div>
+                        <div class="w-12 h-1 bg-emerald-200"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT PAGE -->
+        <section id="page-contact" class="page-content hidden py-24 px-4 bg-white">
+            <div class="max-w-7xl mx-auto">
+                <div class="section-header">
+                    <h2>Reach Out to Us</h2>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-12">
+                    <div class="lg:col-span-1 space-y-6">
+                        <div class="bg-gray-50 p-8 rounded-3xl">
+                            <i class="fas fa-map-marker-alt text-3xl text-emerald-600 mb-4"></i>
+                            <h4 class="font-bold text-xl mb-2">Location</h4>
+                            <p class="text-gray-600 text-sm">Mengo, Kampala, Uganda<br>Near Mengo Hospital, & Kampala MRI Center</p>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-3xl">
+                            <i class="fas fa-phone-alt text-3xl text-emerald-600 mb-4"></i>
+                            <h4 class="font-bold text-xl mb-2">Phone</h4>
+                            <p class="text-gray-600 text-sm">+256 741 990 265: Chairman<br>+256 704 558 927: Treasurer</p>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-3xl">
+                            <i class="fas fa-envelope text-3xl text-emerald-600 mb-4"></i>
+                            <h4 class="font-bold text-xl mb-2">Email</h4>
+                            <p class="text-gray-600 text-sm">info@mmemsa.org<br>contact@mmemsa.org</p>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-2 bg-emerald-900 p-12 rounded-[50px] shadow-2xl">
+                        <h3 class="text-3xl font-bold text-white mb-8">Send us a Message</h3>
+                        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input type="text" placeholder="Your Name" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
+                            <input type="email" placeholder="Your Email" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
+                            <input type="text" placeholder="Subject" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
+                            <textarea placeholder="Message" rows="6" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20"></textarea>
+                            <button class="md:col-span-2 bg-emerald-500 text-white py-4 rounded-xl font-bold text-xl hover:bg-emerald-400 transition">Submit Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-emerald-950 text-white pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-white/10">
+            <div class="col-span-1 lg:col-span-1">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-emerald-900 font-black text-[9px] mr-3">
+                        <img src="logo.jpg" alt="">
+                    </div>
+                    <span class="text-2xl font-black">MMEMSA</span>
+                </div>
+                <p class="text-emerald-100/60 text-sm leading-relaxed mb-6">
+                    The leading Muslim Students association in Mengo, uniting future healers through faith, service, and academic excellence.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-emerald-600 transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-emerald-600 transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-emerald-600 transition"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-bold mb-6 text-emerald-400 uppercase tracking-widest">Navigation</h4>
+                <ul class="space-y-3 text-sm text-emerald-100/60 font-medium">
+                    <li><a href="javascript:void(0)" onclick="showPage('about')" class="hover:text-white">Our History</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('activities')" class="hover:text-white">Activities</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('leadership')" class="hover:text-white">Leadership</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('membership')" class="hover:text-white">Membership</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('gallery')" class="hover:text-white">Gallery</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-bold mb-6 text-emerald-400 uppercase tracking-widest">Institutions</h4>
+                <ul class="space-y-3 text-sm text-emerald-100/60 font-medium">
+                    <li><a href="https://share.google/E62xBmkdDeOn7xbqI" target="_blank" class="hover:text-white">Medicare Health College</a></li>
+                    <li><a href="https://ecu.ac.ug/" target="_blank" class="hover:text-white">Ernest Cook (ECUREI)</a></li>
+                    <li><a href="https://share.google/6CzhkexA9BcQQsg1b" class="hover:text-white">Mengo Hospital Training</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-bold mb-6 text-emerald-400 uppercase tracking-widest">Contact Info</h4>
+                <ul class="space-y-4 text-sm text-emerald-100/60">
+                    <li class="flex items-start">
+                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-emerald-400"></i>
+                        <span>Mengo, Kampala, Uganda</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-phone-alt mr-3 text-emerald-400"></i>
+                        <span>+256 741 990265</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-envelope mr-3 text-emerald-400"></i>
+                        <span>info@mmemsa.org</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 mt-12 text-center">
+            <p class="text-emerald-100/30 text-xs italic mb-4">"And whoever saves one life, it is as if he had saved mankind entirely." (Quran 5:32)</p>
+            <div class="flex flex-col md:flex-row justify-between items-center text-[10px] text-emerald-100/20 uppercase tracking-[0.3em]">
+                <p>&copy; 2026 MMEMSA. All Rights Reserved.</p>
+                <p class="mt-4 md:mt-0">Designed by Eng. Kirabira Mohammad Elias (CEO, MEK Poems)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(p => p.classList.add('hidden'));
+            
+            const target = document.getElementById('page-' + pageId);
+            if(target) {
+                target.classList.remove('hidden');
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                
+                // Active link style
+                const links = document.querySelectorAll('.nav-item');
+                links.forEach(l => l.classList.remove('nav-active'));
+                
+                // Restart carousel if home
+                if(pageId === 'home') startCarousel();
+                else stopCarousel();
+            }
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Hero Carousel
+        let slideIndex = 0;
+        let timer;
+        const slides = document.querySelectorAll('.hero-slide');
+
+        function startCarousel() {
+            if(timer) return;
+            timer = setInterval(() => {
+                slides[slideIndex].classList.remove('active');
+                slideIndex = (slideIndex + 1) % slides.length;
+                slides[slideIndex].classList.add('active');
+            }, 6000);
+        }
+
+        function stopCarousel() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function submitReg() {
+            document.getElementById('reg-form').classList.add('hidden');
+            document.getElementById('reg-success').classList.remove('hidden');
+        }
+
+        // Init
+        window.onload = startCarousel;
+    </script>
+</body>
+</html>
