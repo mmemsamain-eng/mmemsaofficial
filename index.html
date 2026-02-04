@@ -132,14 +132,14 @@
                 </div>
 
                 <div class="hidden lg:flex items-center space-x-8 text-sm font-bold uppercase text-gray-600">
-                    <a href="#home" onclick="showPage('home')" class="nav-item hover:text-emerald-700 transition">Home</a>
-                    <a href="#about" onclick="showPage('about')" class="nav-item hover:text-emerald-700 transition">About</a>
-                    <a href="#activities" onclick="showPage('activities')" class="nav-item hover:text-emerald-700 transition">Activities</a>
-                    <a href="#leadership" onclick="showPage('leadership')" class="nav-item hover:text-emerald-700 transition">Leadership</a>
-                    <a href="#membership" onclick="showPage('membership')" class="nav-item hover:text-emerald-700 transition">Membership</a>
-                    <a href="#gallery" onclick="showPage('gallery')" class="nav-item hover:text-emerald-700 transition">Gallery</a>
-                    <a href="#resources" onclick="showPage('resources')" class="nav-item text-emerald-600 border border-emerald-200 px-3 py-1 rounded hover:bg-emerald-50">Resources</a>
-                    <a href="#contact" onclick="showPage('contact')" class="nav-item hover:text-emerald-700 transition">Contact</a>
+                    <a href="javascript:void(0)" onclick="showPage('home')" class="nav-item hover:text-emerald-700 transition">Home</a>
+                    <a href="javascript:void(0)" onclick="showPage('about')" class="nav-item hover:text-emerald-700 transition">About</a>
+                    <a href="javascript:void(0)" onclick="showPage('activities')" class="nav-item hover:text-emerald-700 transition">Activities</a>
+                    <a href="javascript:void(0)" onclick="showPage('leadership')" class="nav-item hover:text-emerald-700 transition">Leadership</a>
+                    <a href="javascript:void(0)" onclick="showPage('membership')" class="nav-item hover:text-emerald-700 transition">Membership</a>
+                    <a href="javascript:void(0)" onclick="showPage('gallery')" class="nav-item hover:text-emerald-700 transition">Gallery</a>
+                    <a href="javascript:void(0)" onclick="showPage('resources')" class="nav-item text-emerald-600 border border-emerald-200 px-3 py-1 rounded hover:bg-emerald-50">Resources</a>
+                    <a href="javascript:void(0)" onclick="showPage('contact')" class="nav-item hover:text-emerald-700 transition">Contact</a>
                 </div>
 
                 <button class="lg:hidden text-2xl text-emerald-900" onclick="toggleMobileMenu()">
@@ -149,11 +149,11 @@
         </div>
         <!-- Mobile Nav -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t p-6 space-y-4 shadow-xl">
-            <a href="#home" onclick="showPage('home')" class="block font-bold">Home</a>
-            <a href="#about" onclick="showPage('about')" class="block font-bold">About</a>
-            <a href="#activities" onclick="showPage('activities')" class="block font-bold">Activities</a>
-            <a href="#memebership" onclick="showPage('membership')" class="block font-bold">Join Us</a>
-            <a href="#resources" onclick="showPage('resources')" class="block font-bold text-emerald-600">Resources</a>
+            <a href="javascript:void(0)" onclick="showPage('home')" class="block font-bold">Home</a>
+            <a href="javascript:void(0)" onclick="showPage('about')" class="block font-bold">About</a>
+            <a href="javascript:void(0)" onclick="showPage('activities')" class="block font-bold">Activities</a>
+            <a href="javascript:void(0)" onclick="showPage('membership')" class="block font-bold">Join Us</a>
+            <a href="javascript:void(0)" onclick="showPage('resources')" class="block font-bold text-emerald-600">Resources</a>
         </div>
     </nav>
 
@@ -506,22 +506,22 @@
                             <input type="text" placeholder="First Name" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                             <input type="text" placeholder="Last Name" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                         </div>
-                        <select required name="institution" class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                        <select required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                             <option value="">Select Institution</option>
-                            <option value='Medicare">Medicare Health Professionals College</option>
-                            <option value="ECUREI">Ernest Cook University (ECUREI)</option>
-                            <option value="Mengo">Mengo Hospital Training School</option>
+                            <option>Medicare Health Professionals College</option>
+                            <option>Ernest Cook University (ECUREI)</option>
+                            <option>Mengo Hospital Training School</option>
                         </select>
                         <input type="text" placeholder="Course of Study" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                         <div class="grid grid-cols-2 gap-4">
                             <input type="tel" placeholder="Phone Number" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
-                            <select name="gender" class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
-                                <option value="Brother">Brother</option>
-                                <option value="Sister">Sister</option>
+                            <select class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option>Brother</option>
+                                <option>Sister</option>
                             </select>
                         </div>
                         <input type="email" placeholder="Email Address" required class="w-full p-4 bg-gray-50 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
-                        <button onclick="sendToWhatsApp()" class="w-full btn-islamic text-xl py-5 shadow-2xl">Confirm Registration</button>
+                        <button class="w-full btn-islamic text-xl py-5 shadow-2xl">Confirm Registration</button>
                     </form>
                     <div id="reg-success" class="hidden text-center py-10">
                         <i class="fas fa-check-circle text-7xl text-emerald-500 mb-6"></i>
@@ -627,32 +627,18 @@
                         <div class="bg-gray-50 p-8 rounded-3xl">
                             <i class="fas fa-envelope text-3xl text-emerald-600 mb-4"></i>
                             <h4 class="font-bold text-xl mb-2">Email</h4>
-                            <p class="text-gray-600 text-sm">mmemsamain@gmail.com<br>mohammadeliaskirabira@gmail.com</p>
+                            <p class="text-gray-600 text-sm">info@mmemsa.org<br>contact@mmemsa.org</p>
                         </div>
                     </div>
                     
                     <div class="lg:col-span-2 bg-emerald-900 p-12 rounded-[50px] shadow-2xl">
                         <h3 class="text-3xl font-bold text-white mb-8">Send us a Message</h3>
-                        <form action="https://formsubmit.co/mmemsamain@gmail.com" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-    <input type="text" name="name" placeholder="Your Name" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20" required>
-
-    <input type="email" name="email" placeholder="Your Email" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20" required>
-
-    <input type="text" name="subject" placeholder="Subject" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
-
-    <textarea name="message" placeholder="Message" rows="6" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20"></textarea>
-
-    <!-- Prevent spam -->
-    <input type="hidden" name="_captcha" value="false">
-
-    <!-- Optional: redirect after submit -->
-    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
-
-    <button class="md:col-span-2 bg-emerald-500 text-white py-4 rounded-xl font-bold text-xl hover:bg-emerald-400 transition" type="submit">
-        Submit Message
-    </button>
-
+                        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input type="text" placeholder="Your Name" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
+                            <input type="email" placeholder="Your Email" class="p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
+                            <input type="text" placeholder="Subject" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20">
+                            <textarea placeholder="Message" rows="6" class="md:col-span-2 p-4 bg-white/10 text-white rounded-xl border border-white/20 outline-none focus:bg-white/20"></textarea>
+                            <button class="md:col-span-2 bg-emerald-500 text-white py-4 rounded-xl font-bold text-xl hover:bg-emerald-400 transition">Submit Message</button>
                         </form>
                     </div>
                 </div>
@@ -713,7 +699,7 @@
                     </li>
                     <li class="flex items-center">
                         <i class="fas fa-envelope mr-3 text-emerald-400"></i>
-                        <span>mmemsamain@gmail</span>
+                        <span>info@mmemsa.org</span>
                     </li>
                 </ul>
             </div>
@@ -728,7 +714,7 @@
         </div>
     </footer>
 
-     <scipt>
+    <script>
         // Page Navigation
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page-content');
@@ -773,46 +759,13 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        function sendToWhatsApp() {
-    // Collect values
-    const firstName = document.querySelector('input[name="first_name"]').value;
-    const lastName = document.querySelector('input[name="last_name"]').value;
-    const institution = document.querySelector('select[name="institution"]').value;
-    const course = document.querySelector('input[name="course"]').value;
-    const phone = document.querySelector('input[name="phone"]').value;
-    const genderSelect = document.querySelector('select[name="gender"]');
-    const gender = genderSelect ? genderSelect.value : "";
-    const email = document.querySelector('input[name="email"]').value;
-
-    // Validate required fields
-    if (!firstName || !lastName || !institution || !course || !phone || !email) {
-        alert("Please fill all required fields.");
-        return;
-    }
-
-    // Format WhatsApp message
-    const message = `New MMEMSA Registration:%0A
-First Name: ${firstName}%0A
-Last Name: ${lastName}%0A
-Institution: ${institution}%0A
-Course: ${course}%0A
-Phone: ${phone}%0A
-Gender: ${gender}%0A
-Email: ${email}`;
-
-    // WhatsApp number (remove +, keep country code)
-    const whatsappNumber = "256788230472";
-
-    // Open WhatsApp
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
-    window.open(whatsappURL, "_blank");
-}
-
-
+        function submitReg() {
+            document.getElementById('reg-form').classList.add('hidden');
+            document.getElementById('reg-success').classList.remove('hidden');
+        }
 
         // Init
         window.onload = startCarousel;
     </script>
-   
 </body>
 </html>
